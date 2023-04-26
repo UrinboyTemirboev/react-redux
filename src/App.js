@@ -1,23 +1,33 @@
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import Form from "./components/Form";
+import TodoItem from "./components/TodoItem";
+import User from "./components/User";
+import Posts from "./components/Posts";
+import { useSelector } from "react-redux";
 
 function App() {
+  const texts = useSelector((state) => state.todo.todos);
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="min-h-screen h-full w-screen bg-indigo-400">
+      <div className="container mx-auto px-4">
+        <header className="flex gap-20 ">
+          <div className="w-1/3">
+            <h1 className="font-bold my-5">Redux Toolkit State Change</h1>
+            <User />
+          </div>
+          <div className="w-1/3">
+            <h1 className="font-bold my-5">Redux Toolkit Todo App</h1>
+            <Form />
+            {texts.map((todo) => (
+              <TodoItem todo={todo} key={todo.id} />
+            ))}
+          </div>
+          <div className="w-1/3">
+            <h1 className="font-bold my-5">Redux Toolkit Async Thunk</h1>
+            <Posts />
+          </div>
+        </header>
+      </div>
     </div>
   );
 }
